@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://csyoxp2vcctah"]
+
+[ext_resource type="PackedScene" uid="uid://bgyd1tv1qc5wf" path="res://entities/creature.tscn" id="1_cehtf"]
+[ext_resource type="Script" uid="uid://xratqg24rula" path="res://entities/bat.gd" id="2_6jndr"]
+[ext_resource type="Texture2D" uid="uid://ddls3ogcboabo" path="res://assets/bat.png" id="3_lvmvp"]
+
+[node name="Bat" unique_id=1666358491 instance=ExtResource("1_cehtf")]
+script = ExtResource("2_6jndr")
+legs = 3
+creature_name = "Bat"
+move_speed = 70.0
+creature_color = Color(0.28725913, 0.98800784, 1, 1)
+
+[node name="Sprite2D" parent="." index="0" unique_id=1413329485]
+modulate = Color(0.28725913, 0.98800784, 1, 1)
+texture = ExtResource("3_lvmvp")
