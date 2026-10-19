@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cingeu23m2dyn"]
+
+[ext_resource type="Script" uid="uid://cnetvwoic38qe" path="res://components/hunger_component.gd" id="1_27k7i"]
+
+[node name="HungerComponent" type="Node" unique_id=716004962]
+script = ExtResource("1_27k7i")
+rate = 10.0

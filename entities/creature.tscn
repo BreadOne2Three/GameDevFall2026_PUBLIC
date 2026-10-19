@@ -1,8 +1,22 @@
 [gd_scene format=3 uid="uid://bgyd1tv1qc5wf"]
 
 [ext_resource type="Script" uid="uid://ckyip60fegaii" path="res://entities/creature.gd" id="1_fd6ru"]
+[ext_resource type="PackedScene" uid="uid://cingeu23m2dyn" path="res://components/hunger_component.tscn" id="2_27ukq"]
+[ext_resource type="PackedScene" uid="uid://c4q5kfvonfw24" path="res://components/movement_component.tscn" id="3_s2qhw"]
 
 [node name="Creature" type="CharacterBody2D" unique_id=1666358491]
 script = ExtResource("1_fd6ru")
+health = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1413329485]
+
+[node name="HungerComponent" parent="." unique_id=716004962 instance=ExtResource("2_27ukq")]
+
+[node name="TimeToLive" type="Timer" parent="." unique_id=900654869]
+wait_time = 5.0
+
+[node name="MovementComponent" parent="." unique_id=143754694 instance=ExtResource("3_s2qhw")]
+
+[connection signal="hunger_changed" from="HungerComponent" to="." method="_on_hunger_changed"]
+[connection signal="starved" from="HungerComponent" to="." method="_on_starved"]
+[connection signal="timeout" from="TimeToLive" to="." method="_on_time_to_live_timeout"]

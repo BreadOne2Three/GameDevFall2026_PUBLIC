@@ -1,3 +1,16 @@
 [gd_scene format=3 uid="uid://qkdy73ns3uri"]
 
+[ext_resource type="PackedScene" uid="uid://csyoxp2vcctah" path="res://entities/bat.tscn" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bcsd3fiiwx34y" path="res://entities/slime.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cgt1qlwxyfgdb" path="res://entities/dog.tscn" id="3_lquwl"]
+
 [node name="main" type="Node2D" unique_id=929389321]
+
+[node name="Bat" parent="." unique_id=1666358491 instance=ExtResource("1_h2yge")]
+position = Vector2(46, 43)
+
+[node name="Slime" parent="." unique_id=499378842 instance=ExtResource("2_1bvp3")]
+position = Vector2(53, 22)
+
+[node name="Dog" parent="." unique_id=1201340478 instance=ExtResource("3_lquwl")]
+position = Vector2(32, 26)

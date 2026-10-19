@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="terrarium"
+run/main_scene="uid://qkdy73ns3uri"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=320
+window/stretch/mode="canvas_items"
 
 [physics]
 
