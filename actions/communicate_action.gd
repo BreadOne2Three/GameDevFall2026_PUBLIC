@@ -1,0 +1,27 @@
+extends JointAction
+class_name CommunicateAction
+## Walk up to someone and have a little chat. Friends of the same species count more.
+
+const EMOTES : Array[String] = ["<3", "!", "?", "~"]
+
+@export var social_per_second : float = 15.0
+@export var same_species_bonus : float = 1.5
+var _emote_timer : float = 0.0
+
+func _init() -> void:
+	need_name = "Social"
+	ramp_start = 0.4
+	ramp_end = 1.0
+	max_score = 0.7
+	duration = 3.0
+
+func together(delta: float) -> void:
+	creature.movement.stop()
+	var amount := social_per_second * delta
+	if partner.species == creature.species:
+		amount *= same_species_bonus
+	creature.need("Social").satisfy(amount)
+	_emote_timer -= delta
+	if _emote_timer <= 0.0:
+		_emote_timer = 1.0
+		creature.emote(EMOTES.pick_random(), 0.8)

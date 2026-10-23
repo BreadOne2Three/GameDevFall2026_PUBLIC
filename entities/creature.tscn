@@ -11,6 +11,9 @@
 [ext_resource type="Script" path="res://actions/rest_action.gd" id="10_rest"]
 [ext_resource type="Script" path="res://actions/go_here_action.gd" id="11_gohere"]
 [ext_resource type="Script" path="res://actions/use_litter_box_action.gd" id="12_box"]
+[ext_resource type="Script" path="res://actions/play_action.gd" id="13_play"]
+[ext_resource type="Script" path="res://actions/communicate_action.gd" id="14_talk"]
+[ext_resource type="Script" path="res://actions/breed_action.gd" id="15_breed"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 4.0
@@ -79,6 +82,15 @@ script = ExtResource("11_gohere")
 
 [node name="UseLitterBoxAction" type="Node" parent="Brain"]
 script = ExtResource("12_box")
+
+[node name="PlayAction" type="Node" parent="Brain"]
+script = ExtResource("13_play")
+
+[node name="CommunicateAction" type="Node" parent="Brain"]
+script = ExtResource("14_talk")
+
+[node name="BreedAction" type="Node" parent="Brain"]
+script = ExtResource("15_breed")
 
 [node name="Emote" type="Label" parent="."]
 visible = false
