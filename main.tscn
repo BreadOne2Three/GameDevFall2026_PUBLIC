@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://world/water_dish.tscn" id="6_dish"]
 [ext_resource type="PackedScene" path="res://world/litter_box.tscn" id="7_box"]
 [ext_resource type="PackedScene" path="res://world/food.tscn" id="8_food"]
+[ext_resource type="PackedScene" path="res://entities/human.tscn" id="9_human"]
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_world")
@@ -54,3 +55,9 @@ position = Vector2(150, 120)
 [node name="Slime2" parent="Creatures" instance=ExtResource("5_slime")]
 position = Vector2(240, 160)
 selected_color = 1
+
+[node name="Human" parent="Creatures" instance=ExtResource("9_human")]
+position = Vector2(120, 260)
+
+[node name="Human2" parent="Creatures" instance=ExtResource("9_human")]
+position = Vector2(60, 140)

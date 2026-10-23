@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bgyd1tv1qc5wf" path="res://entities/creature.tscn" id="1_l34on"]
 [ext_resource type="Script" uid="uid://c1w2226lugul6" path="res://entities/dog.gd" id="2_60dt4"]
 [ext_resource type="Texture2D" uid="uid://b4ox3j3rcin5" path="res://assets/dog.png" id="3_gycl2"]
+[ext_resource type="Script" path="res://actions/hunt_action.gd" id="4_hunt"]
 
 [node name="Dog" unique_id=1666358491 instance=ExtResource("1_l34on")]
 script = ExtResource("2_60dt4")
@@ -13,3 +14,6 @@ creature_color = Color(0.7720941, 0.65600693, 0.30751157, 1)
 
 [node name="Sprite2D" parent="." index="0" unique_id=1413329485]
 texture = ExtResource("3_gycl2")
+
+[node name="HuntAction" type="Node" parent="Brain"]
+script = ExtResource("4_hunt")

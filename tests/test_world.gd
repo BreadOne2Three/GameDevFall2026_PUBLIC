@@ -11,6 +11,7 @@ func test_starts_with_a_pair_of_each_species() -> void:
 	assert_eq(counts["Bat"], 2)
 	assert_eq(counts["Dog"], 2)
 	assert_eq(counts["Slime"], 2)
+	assert_eq(counts["Human"], 2)
 
 func test_baby_inherits_species_and_starts_small() -> void:
 	var world := _world()

@@ -12,6 +12,7 @@ const SPECIES_SCENES := {
 	"Bat": preload("res://entities/bat.tscn"),
 	"Dog": preload("res://entities/dog.tscn"),
 	"Slime": preload("res://entities/slime.tscn"),
+	"Human": preload("res://entities/human.tscn"),
 }
 const FOOD_SCENE := preload("res://world/food.tscn")
 const DROPPING_SCENE := preload("res://world/dropping.tscn")

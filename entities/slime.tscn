@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bgyd1tv1qc5wf" path="res://entities/creature.tscn" id="1_tm2b2"]
 [ext_resource type="Texture2D" uid="uid://bocwvtxwvmgka" path="res://assets/slime.png" id="2_aom40"]
 [ext_resource type="Script" uid="uid://c8581uoo27vj5" path="res://entities/slime.gd" id="2_imykf"]
+[ext_resource type="Script" path="res://actions/scavenge_action.gd" id="4_scavenge"]
 
 [node name="Slime" unique_id=1666358491 instance=ExtResource("1_tm2b2")]
 script = ExtResource("2_imykf")
@@ -14,3 +15,6 @@ selected_color = 0
 [node name="Sprite2D" parent="." index="0" unique_id=1413329485]
 modulate = Color(0.98039216, 0.92156863, 0.84313726, 1)
 texture = ExtResource("2_aom40")
+
+[node name="ScavengeAction" type="Node" parent="Brain"]
+script = ExtResource("4_scavenge")
