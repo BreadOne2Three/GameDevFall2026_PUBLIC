@@ -21,6 +21,8 @@ hframes = 4
 
 [node name="BegAction" type="Node" parent="Brain"]
 script = ExtResource("4_beg")
+is_survival = true
+need_name = "Hunger"
 
 [node name="CalmAction" type="Node" parent="Brain"]
 script = ExtResource("5_calm")

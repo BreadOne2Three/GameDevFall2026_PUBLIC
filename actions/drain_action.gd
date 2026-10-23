@@ -13,10 +13,6 @@ var victim : Creature
 var _drains_left : int = 0
 var _drain_timer : float = 0.0
 
-func _init() -> void:
-	is_survival = true
-	need_name = "Hunger"
-
 func score() -> float:
 	if not creature.is_aggroed():
 		return 0.0

@@ -18,3 +18,5 @@ texture = ExtResource("2_aom40")
 
 [node name="ScavengeAction" type="Node" parent="Brain"]
 script = ExtResource("4_scavenge")
+is_survival = true
+need_name = "Hunger"

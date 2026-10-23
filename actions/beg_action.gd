@@ -4,10 +4,6 @@ class_name BegAction
 
 @export var beg_score : float = 0.9
 
-func _init() -> void:
-	is_survival = true
-	need_name = "Hunger"
-
 func score() -> float:
 	return beg_score if creature.is_starving else 0.0
 

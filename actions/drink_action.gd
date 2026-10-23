@@ -4,12 +4,6 @@ class_name DrinkAction
 
 var dish : WaterDish
 
-func _init() -> void:
-	is_survival = true
-	need_name = "Thirst"
-	ramp_start = 0.3
-	ramp_end = 0.9
-
 func score() -> float:
 	dish = creature.nearest_in_group("water", INF, func(d): return d.has_water())
 	if dish == null:

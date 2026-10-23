@@ -11,10 +11,6 @@ class_name HuntAction
 var prey : Creature
 var _bite_timer : float = 0.0
 
-func _init() -> void:
-	is_survival = true
-	need_name = "Hunger"
-
 func score() -> float:
 	if not creature.is_aggroed():
 		return 0.0

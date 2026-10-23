@@ -4,14 +4,6 @@ class_name PlayAction
 
 @export var fun_per_second : float = 12.0
 
-func _init() -> void:
-	need_name = "Fun"
-	ramp_start = 0.5
-	ramp_end = 1.0
-	max_score = 0.7
-	duration = 4.0
-	requires_contact = false
-
 func enter() -> void:
 	super.enter()
 	if partner:

@@ -17,3 +17,5 @@ texture = ExtResource("3_gycl2")
 
 [node name="HuntAction" type="Node" parent="Brain"]
 script = ExtResource("4_hunt")
+is_survival = true
+need_name = "Hunger"

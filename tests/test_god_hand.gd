@@ -65,3 +65,22 @@ func test_speed_cycles() -> void:
 	hand.cycle_speed()
 	hand.cycle_speed()
 	assert_near(Engine.time_scale, 1.0)
+
+func test_tiny_twitch_on_release_is_not_a_throw() -> void:
+	_setup()
+	hand.add_sample(Vector2(100, 100), 0.95)
+	hand.add_sample(Vector2(103, 100), 0.966)
+	assert_true(hand.release_velocity(0.966).length() < Creature.THROW_PUNISH_SPEED)
+
+func test_release_while_paused_lets_go() -> void:
+	_setup()
+	hand.press(creature.global_position)
+	hand.move(creature.global_position + Vector2(5, 0))
+	tree.paused = true
+	var release := InputEventMouseButton.new()
+	release.button_index = MOUSE_BUTTON_LEFT
+	release.pressed = false
+	hand._unhandled_input(release)
+	tree.paused = false
+	assert_eq(hand.held, null)
+	assert_true(creature.state != Creature.State.HELD)

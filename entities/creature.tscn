@@ -70,27 +70,54 @@ script = ExtResource("7_wander")
 
 [node name="EatAction" type="Node" parent="Brain"]
 script = ExtResource("8_eat")
+is_survival = true
+need_name = "Hunger"
+ramp_start = 0.3
+ramp_end = 0.9
 
 [node name="DrinkAction" type="Node" parent="Brain"]
 script = ExtResource("9_drink")
+is_survival = true
+need_name = "Thirst"
+ramp_start = 0.3
+ramp_end = 0.9
 
 [node name="RestAction" type="Node" parent="Brain"]
 script = ExtResource("10_rest")
+need_name = "Energy"
+ramp_start = 0.6
+max_score = 0.8
+max_duration = 30.0
 
 [node name="GoHereAction" type="Node" parent="Brain"]
 script = ExtResource("11_gohere")
+need_name = "Bladder"
+ramp_start = 0.6
+max_score = 0.8
 
 [node name="UseLitterBoxAction" type="Node" parent="Brain"]
 script = ExtResource("12_box")
+need_name = "Bladder"
+ramp_start = 0.6
+max_score = 0.8
 
 [node name="PlayAction" type="Node" parent="Brain"]
 script = ExtResource("13_play")
+need_name = "Fun"
+max_score = 0.7
+duration = 4.0
+requires_contact = false
 
 [node name="CommunicateAction" type="Node" parent="Brain"]
 script = ExtResource("14_talk")
+need_name = "Social"
+ramp_start = 0.4
+max_score = 0.7
 
 [node name="BreedAction" type="Node" parent="Brain"]
 script = ExtResource("15_breed")
+duration = 2.0
+search_radius = 120.0
 
 [node name="Emote" type="Label" parent="."]
 visible = false

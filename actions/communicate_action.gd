@@ -8,13 +8,6 @@ const EMOTES : Array[String] = ["<3", "!", "?", "~"]
 @export var same_species_bonus : float = 1.5
 var _emote_timer : float = 0.0
 
-func _init() -> void:
-	need_name = "Social"
-	ramp_start = 0.4
-	ramp_end = 1.0
-	max_score = 0.7
-	duration = 3.0
-
 func together(delta: float) -> void:
 	creature.movement.stop()
 	var amount := social_per_second * delta

@@ -5,12 +5,6 @@ class_name UseLitterBoxAction
 
 var box : Node2D
 
-func _init() -> void:
-	need_name = "Bladder"
-	ramp_start = 0.6
-	ramp_end = 1.0
-	max_score = 0.8
-
 func score() -> float:
 	box = creature.nearest_in_group("litter_box")
 	if box == null:

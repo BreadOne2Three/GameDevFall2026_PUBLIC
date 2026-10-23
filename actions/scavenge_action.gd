@@ -6,10 +6,6 @@ class_name ScavengeAction
 @export var scavenge_score : float = 0.9
 var target : Node2D
 
-func _init() -> void:
-	is_survival = true
-	need_name = "Hunger"
-
 func score() -> float:
 	if not creature.is_starving:
 		return 0.0

@@ -5,10 +5,6 @@ class_name BreedAction
 @export var breed_score : float = 0.6
 @export var breed_cooldown : float = 45.0
 
-func _init() -> void:
-	duration = 2.0
-	search_radius = 120.0
-
 func score() -> float:
 	if not creature.can_breed() or _world_full():
 		return 0.0

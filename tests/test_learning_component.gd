@@ -57,3 +57,10 @@ func test_inherit_passes_on_half_of_what_parents_learned() -> void:
 	assert_near(kid.bias("UseLitterBoxAction"), 0.0)
 	# HuntAction: default 0, average (-0.4 + 0) / 2 = -0.2 -> half = -0.1
 	assert_near(kid.bias("HuntAction"), -0.1)
+
+func test_repeated_action_in_history_is_credited_once() -> void:
+	var l := _learner()
+	for i in 5:
+		l.record_action("WanderAction")   # wander finishes on every arrival, so it fills the history
+	l.reward(1.0)
+	assert_near(l.bias("WanderAction"), 0.15)

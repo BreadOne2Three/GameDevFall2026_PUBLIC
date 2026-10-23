@@ -5,6 +5,7 @@ class_name GodHand
 
 const DRAG_START_DISTANCE := 3.0   ## px the mouse must move while pressed before it's a grab
 const VELOCITY_WINDOW := 0.1       ## seconds of mouse movement used for throw velocity
+const MIN_VELOCITY_TIME := 0.05    ## never measure over less time than this, so a tiny twitch isn't a throw
 const SPEEDS : Array[float] = [1.0, 2.0, 4.0]
 const REINTRODUCE_KEYS := {KEY_1: "Bat", KEY_2: "Dog", KEY_3: "Slime", KEY_4: "Human"}
 
@@ -21,15 +22,16 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		_on_key(event.keycode)
 		return
+	var pos := get_global_mouse_position()
+	# Letting go of the button always counts, even while paused, so nothing stays stuck to the cursor.
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		release_at(pos)
+		return
 	if get_tree().paused:
 		return
-	var pos := get_global_mouse_position()
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				press(pos, event.double_click)
-			else:
-				release_at(pos)
+			press(pos, event.double_click)
 		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			right_click(pos)
 	elif event is InputEventMouseMotion:
@@ -89,9 +91,7 @@ func release_velocity(now: float) -> Vector2:
 	var first : Array = _samples[0]
 	var last : Array = _samples[-1]
 	var dt : float = last[0] - first[0]
-	if dt <= 0.0:
-		return Vector2.ZERO
-	return (last[1] - first[1]) / dt
+	return (last[1] - first[1]) / maxf(dt, MIN_VELOCITY_TIME)
 
 func cycle_speed() -> void:
 	_speed_index = (_speed_index + 1) % SPEEDS.size()

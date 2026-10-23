@@ -94,3 +94,18 @@ func test_bladder_full_forces_accident() -> void:
 	var dog := _dog()
 	dog.need("Bladder").add(100.0)
 	assert_eq(dog.brain.current_action_name(), "GoHereAction")
+
+func test_potty_training_with_realistic_timing() -> void:
+	var dog := _dog()
+	_at(BOX, Vector2(290, 290))
+	# GoHere finishes instantly, the dog starts wandering, and the flick lands a second later.
+	for i in 2:
+		dog.learning.record_action("GoHereAction")
+		dog.learning.record_action("WanderAction")
+		dog.learning.now += 1.0
+		dog.learning.reward(-1.0)
+	dog.learning.record_action("")
+	dog.need("Bladder").add(80.0)
+	dog.brain.think()
+	assert_eq(dog.brain.current_action_name(), "UseLitterBoxAction")
+	assert_true(dog.learning.bias("WanderAction") > -0.31, "one flick per accident shouldn't wreck wandering")

@@ -20,3 +20,5 @@ texture = ExtResource("3_lvmvp")
 
 [node name="DrainAction" type="Node" parent="Brain"]
 script = ExtResource("4_drain")
+is_survival = true
+need_name = "Hunger"

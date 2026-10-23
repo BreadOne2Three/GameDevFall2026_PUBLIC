@@ -4,12 +4,6 @@ class_name EatAction
 
 var food : Node2D
 
-func _init() -> void:
-	is_survival = true
-	need_name = "Hunger"
-	ramp_start = 0.3
-	ramp_end = 0.9
-
 func score() -> float:
 	food = creature.nearest_in_group("food")
 	if food == null:

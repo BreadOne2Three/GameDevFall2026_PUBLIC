@@ -41,13 +41,19 @@ func record_action(action_name: String) -> void:
 	current_action = action_name
 
 ## Positive = reward (pet), negative = punishment (flick, throw).
+## Each action is credited once, by its most recent occurrence, so an action that
+## repeats a lot (like wandering) doesn't soak up several rewards at once.
 func reward(amount: float) -> void:
+	var credit := {}   # action name -> share of the reward (0..1)
 	if current_action != "":
-		_adjust(current_action, amount)
+		credit[current_action] = 1.0
 	for entry in history:
 		var age : float = now - entry["ended_at"]
 		if age <= credit_window:
-			_adjust(entry["action"], amount * (1.0 - age / credit_window))
+			var share := 1.0 - age / credit_window
+			credit[entry["action"]] = maxf(credit.get(entry["action"], 0.0), share)
+	for action_name in credit:
+		_adjust(action_name, amount * credit[action_name])
 
 ## Babies start with the defaults plus half of what their parents learned.
 func inherit_from(a: LearningComponent, b: LearningComponent) -> void:
