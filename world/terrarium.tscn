@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/terrarium.gd" id="1_terr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wide"]
+size = Vector2(400, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tall"]
+size = Vector2(40, 400)
+
+[node name="Terrarium" type="Node2D"]
+script = ExtResource("1_terr")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(160, -12)
+
+[node name="Shape" type="CollisionShape2D" parent="TopWall"]
+shape = SubResource("RectangleShape2D_wide")
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+position = Vector2(160, 332)
+
+[node name="Shape" type="CollisionShape2D" parent="BottomWall"]
+shape = SubResource("RectangleShape2D_wide")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-12, 160)
+
+[node name="Shape" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_tall")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(332, 160)
+
+[node name="Shape" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_tall")

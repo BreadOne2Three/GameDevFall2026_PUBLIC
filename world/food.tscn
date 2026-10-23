@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/food.gd" id="1_food"]
+
+[node name="Food" type="Node2D" groups=["food"]]
+script = ExtResource("1_food")

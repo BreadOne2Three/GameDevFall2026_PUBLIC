@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/litter_box.gd" id="1_litter_box"]
+
+[node name="LitterBox" type="Node2D" groups=["litter_box"]]
+script = ExtResource("1_litter_box")

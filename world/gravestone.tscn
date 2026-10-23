@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/gravestone.gd" id="1_gravestone"]
+
+[node name="Gravestone" type="Node2D" groups=["gravestone"]]
+script = ExtResource("1_gravestone")

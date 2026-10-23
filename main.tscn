@@ -1,16 +1,56 @@
 [gd_scene format=3 uid="uid://qkdy73ns3uri"]
 
-[ext_resource type="PackedScene" uid="uid://csyoxp2vcctah" path="res://entities/bat.tscn" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bcsd3fiiwx34y" path="res://entities/slime.tscn" id="2_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://cgt1qlwxyfgdb" path="res://entities/dog.tscn" id="3_lquwl"]
+[ext_resource type="Script" path="res://world/world.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://world/terrarium.tscn" id="2_terr"]
+[ext_resource type="PackedScene" uid="uid://csyoxp2vcctah" path="res://entities/bat.tscn" id="3_bat"]
+[ext_resource type="PackedScene" uid="uid://cgt1qlwxyfgdb" path="res://entities/dog.tscn" id="4_dog"]
+[ext_resource type="PackedScene" uid="uid://bcsd3fiiwx34y" path="res://entities/slime.tscn" id="5_slime"]
+[ext_resource type="PackedScene" path="res://world/water_dish.tscn" id="6_dish"]
+[ext_resource type="PackedScene" path="res://world/litter_box.tscn" id="7_box"]
+[ext_resource type="PackedScene" path="res://world/food.tscn" id="8_food"]
 
-[node name="main" type="Node2D" unique_id=929389321]
+[node name="World" type="Node2D" groups=["world"]]
+script = ExtResource("1_world")
 
-[node name="Bat" parent="." unique_id=1666358491 instance=ExtResource("1_h2yge")]
-position = Vector2(46, 43)
+[node name="Terrarium" parent="." instance=ExtResource("2_terr")]
 
-[node name="Slime" parent="." unique_id=499378842 instance=ExtResource("2_1bvp3")]
-position = Vector2(53, 22)
+[node name="Objects" type="Node2D" parent="."]
 
-[node name="Dog" parent="." unique_id=1201340478 instance=ExtResource("3_lquwl")]
-position = Vector2(32, 26)
+[node name="WaterDish" parent="Objects" instance=ExtResource("6_dish")]
+position = Vector2(40, 290)
+
+[node name="WaterDish2" parent="Objects" instance=ExtResource("6_dish")]
+position = Vector2(280, 40)
+
+[node name="LitterBox" parent="Objects" instance=ExtResource("7_box")]
+position = Vector2(290, 290)
+
+[node name="Food" parent="Objects" instance=ExtResource("8_food")]
+position = Vector2(160, 160)
+
+[node name="Food2" parent="Objects" instance=ExtResource("8_food")]
+position = Vector2(100, 100)
+
+[node name="Food3" parent="Objects" instance=ExtResource("8_food")]
+position = Vector2(220, 220)
+
+[node name="Creatures" type="Node2D" parent="."]
+
+[node name="Bat" parent="Creatures" instance=ExtResource("3_bat")]
+position = Vector2(60, 60)
+
+[node name="Bat2" parent="Creatures" instance=ExtResource("3_bat")]
+position = Vector2(260, 80)
+
+[node name="Dog" parent="Creatures" instance=ExtResource("4_dog")]
+position = Vector2(80, 200)
+
+[node name="Dog2" parent="Creatures" instance=ExtResource("4_dog")]
+position = Vector2(200, 240)
+
+[node name="Slime" parent="Creatures" instance=ExtResource("5_slime")]
+position = Vector2(150, 120)
+
+[node name="Slime2" parent="Creatures" instance=ExtResource("5_slime")]
+position = Vector2(240, 160)
+selected_color = 1
