@@ -13,7 +13,8 @@ func test_hud_toggles_and_describes_actions() -> void:
 	var c : Creature = world.get_tree().get_nodes_in_group("creatures")[0]
 	assert_eq(hud.describe_action(c), "Idle")
 	c.brain.think()
-	assert_eq(hud.describe_action(c), "Wander")
+	assert_eq(hud.describe_action(c), c.brain.current_action_name().trim_suffix("Action"))
+	assert_true(hud.describe_action(c) != "Idle")
 	c.grab()
 	assert_eq(hud.describe_action(c), "Held")
 

@@ -1,20 +1,22 @@
 extends UtilityAction
 class_name DrinkAction
-## Walk to the nearest water dish that still has water and take a sip.
+## Walk to the nearest shore of the lake and take a sip.
 
-var dish : WaterDish
+var lake : Lake
 
 func score() -> float:
-	dish = creature.nearest_in_group("water", INF, func(d): return d.has_water())
-	if dish == null:
+	lake = creature.nearest_in_group("water")
+	if lake == null:
 		return 0.0
 	return need_score()
 
 func run(_delta: float) -> bool:
-	if not is_instance_valid(dish) or not dish.has_water():
+	if not is_instance_valid(lake):
 		return true
-	if walk_to(dish.global_position):
-		creature.need("Thirst").satisfy(dish.drink())
+	var here : Vector2 = creature.global_position
+	if lake.contains(here) or walk_to(lake.shore_point(here)):
+		creature.movement.stop()
+		creature.need("Thirst").satisfy(lake.drink())
 		creature.emote("~")
 		return true
 	return false

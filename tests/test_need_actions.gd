@@ -2,7 +2,6 @@ extends TestCase
 
 const DOG := preload("res://entities/dog.tscn")
 const FOOD := preload("res://world/food.tscn")
-const DISH := preload("res://world/water_dish.tscn")
 const BOX := preload("res://world/litter_box.tscn")
 
 func _at(scene: PackedScene, pos: Vector2) -> Node2D:
@@ -43,15 +42,25 @@ func test_eat_ends_cleanly_when_food_vanishes() -> void:
 	food.free()
 	assert_true(eat.run(0.016))
 
-func test_drink_ignores_empty_dish() -> void:
-	var dog := _dog()
-	var dish : WaterDish = _at(DISH, Vector2(120, 100))
+func test_drink_walks_to_the_lake_shore_and_drinks() -> void:
+	var dog := _dog(Vector2(200, 100))
+	_at(load("res://world/lake.tscn"), Vector2(100, 100))
 	dog.need("Thirst").add(90.0)
 	var drink := dog.brain.get_action("DrinkAction")
 	assert_true(drink.score() > 0.0)
-	for i in dish.max_sips:
-		dish.drink()
-	assert_near(drink.score(), 0.0)
+	assert_false(drink.run(0.016))
+	assert_true(dog.movement.target.x > 100.0, "heads for the near shore, not the middle")
+	dog.global_position = dog.movement.target
+	assert_true(drink.run(0.016))
+	assert_true(dog.need("Thirst").value < 90.0)
+
+func test_wander_pauses_after_arriving() -> void:
+	var dog := _dog()
+	var wander := dog.brain.get_action("WanderAction")
+	wander.enter()
+	dog.movement.stop()   # arrived
+	assert_false(wander.run(0.5), "lingers a moment")
+	assert_true(wander.run(wander.pause_max))
 
 func test_rest_is_committed_until_rested() -> void:
 	var dog := _dog()

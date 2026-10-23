@@ -1,7 +1,7 @@
 extends Node2D
 class_name GodHand
 ## The player's hand. Drag to grab and throw, double-click to pet, right-click to flick
-## (or drop food on empty ground), click droppings to clean and dishes to refill.
+## (or drop food on empty ground), click droppings to clean them up.
 
 const DRAG_START_DISTANCE := 3.0   ## px the mouse must move while pressed before it's a grab
 const VELOCITY_WINDOW := 0.1       ## seconds of mouse movement used for throw velocity
@@ -104,10 +104,6 @@ func _click_ground(pos: Vector2) -> void:
 	var dropping := world.object_at(pos, "dropping")
 	if dropping:
 		dropping.queue_free()
-		return
-	var dish := world.object_at(pos, "water")
-	if dish:
-		dish.refill()
 
 func _on_key(keycode: Key) -> void:
 	if keycode == KEY_SPACE:

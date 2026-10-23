@@ -22,6 +22,7 @@ radius = 4.0
 collision_layer = 2
 collision_mask = 1
 script = ExtResource("1_fd6ru")
+move_speed = 20.0
 health = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1413329485]
@@ -33,26 +34,27 @@ shape = SubResource("CircleShape2D_body")
 
 [node name="Hunger" type="Node" parent="Needs"]
 script = ExtResource("4_need")
-rate = 1.0
+rate = 0.5
 
 [node name="Thirst" type="Node" parent="Needs"]
 script = ExtResource("4_need")
-rate = 1.4
+rate = 0.7
 
 [node name="Energy" type="Node" parent="Needs"]
 script = ExtResource("4_need")
-rate = 0.8
+rate = 0.4
 
 [node name="Fun" type="Node" parent="Needs"]
 script = ExtResource("4_need")
+rate = 0.5
 
 [node name="Social" type="Node" parent="Needs"]
 script = ExtResource("4_need")
-rate = 0.7
+rate = 0.35
 
 [node name="Bladder" type="Node" parent="Needs"]
 script = ExtResource("4_need")
-rate = 1.2
+rate = 0.6
 
 [node name="TimeToLive" type="Timer" parent="." unique_id=900654869]
 wait_time = 5.0

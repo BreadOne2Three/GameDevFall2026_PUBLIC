@@ -11,6 +11,7 @@ func _spawn(scene: PackedScene, pos: Vector2) -> Creature:
 func _content(c: Creature) -> void:
 	for n in ["Hunger", "Thirst", "Energy", "Fun", "Social", "Bladder"]:
 		c.need(n).satisfy(100.0)
+	c.brain.get_action("BreedAction").cooldown_left = 0.0   # skip the settling-in period
 
 func test_communicate_invites_partner_who_switches_too() -> void:
 	var a := _spawn(DOG, Vector2(100, 100))

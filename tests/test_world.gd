@@ -5,22 +5,22 @@ const MAIN := preload("res://main.tscn")
 func _world() -> World:
 	return add(MAIN.instantiate()) as World
 
-func test_starts_with_a_pair_of_each_species() -> void:
+func test_starts_with_just_a_pair_of_slimes() -> void:
 	var world := _world()
 	var counts := world.counts()
-	assert_eq(counts["Bat"], 2)
-	assert_eq(counts["Dog"], 2)
 	assert_eq(counts["Slime"], 2)
-	assert_eq(counts["Human"], 2)
+	assert_eq(counts["Bat"], 0)
+	assert_eq(counts["Dog"], 0)
+	assert_eq(counts["Human"], 0)
 
 func test_baby_inherits_species_and_starts_small() -> void:
 	var world := _world()
-	var dogs := world.get_tree().get_nodes_in_group("creatures").filter(func(c): return c.species == "Dog")
-	var baby := world.spawn_baby(dogs[0], dogs[1])
-	assert_eq(baby.species, "Dog")
+	var slimes := world.get_tree().get_nodes_in_group("creatures").filter(func(c): return c.species == "Slime")
+	var baby := world.spawn_baby(slimes[0], slimes[1])
+	assert_eq(baby.species, "Slime")
 	assert_false(baby.is_adult)
 	assert_near(baby.growth, 0.5)
-	assert_eq(world.counts()["Dog"], 3)
+	assert_eq(world.counts()["Slime"], 3)
 
 func test_population_cap() -> void:
 	var world := _world()
@@ -31,13 +31,15 @@ func test_population_cap() -> void:
 
 func test_reintroduce_only_when_extinct() -> void:
 	var world := _world()
-	assert_false(world.reintroduce("Bat"))
-	for c in world.get_tree().get_nodes_in_group("creatures"):
-		if c.species == "Bat":
-			c.die()
-	assert_true(world.is_extinct("Bat"))
 	assert_true(world.reintroduce("Bat"))
 	assert_eq(world.counts()["Bat"], 2)
+	assert_false(world.reintroduce("Bat"))
+	assert_false(world.reintroduce("Slime"))
+	for c in world.get_tree().get_nodes_in_group("creatures"):
+		if c.species == "Slime":
+			c.die()
+	assert_true(world.is_extinct("Slime"))
+	assert_true(world.reintroduce("Slime"))
 
 func test_death_leaves_gravestone_and_poop_leaves_dropping() -> void:
 	var world := _world()
@@ -56,14 +58,20 @@ func test_drop_food_is_clamped_inside_glass_and_capped() -> void:
 		world.drop_food(Vector2(100, 100))
 	assert_eq(world.get_tree().get_nodes_in_group("food").size(), World.MAX_FOOD)
 
-func test_water_dish_sips_and_refill() -> void:
-	var dish : WaterDish = add(preload("res://world/water_dish.tscn").instantiate())
-	for i in dish.max_sips:
-		assert_near(dish.drink(), dish.sip_amount)
-	assert_false(dish.has_water())
-	assert_near(dish.drink(), 0.0)
-	dish.refill()
-	assert_true(dish.has_water())
+func test_lake_never_runs_out() -> void:
+	var lake : Node2D = add(load("res://world/lake.tscn").instantiate())
+	for i in 100:
+		assert_near(lake.drink(), lake.sip_amount)
+	assert_true(lake.has_water())
+
+func test_lake_shore_point_faces_the_creature() -> void:
+	var lake : Node2D = add(load("res://world/lake.tscn").instantiate())
+	lake.position = Vector2(100, 100)
+	var shore : Vector2 = lake.shore_point(Vector2(200, 100))
+	assert_near(shore.x, 100 + lake.radius.x, 0.01)
+	assert_near(shore.y, 100.0, 0.01)
+	assert_true(lake.contains(Vector2(105, 102)))
+	assert_false(lake.contains(Vector2(200, 100)))
 
 func test_creature_at_picks_nearest_within_radius() -> void:
 	var world := _world()

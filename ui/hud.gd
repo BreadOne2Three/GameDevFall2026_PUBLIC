@@ -9,8 +9,8 @@ const BAR_WIDTH := 40.0
 const NEED_NAMES : Array[String] = ["Hunger", "Thirst", "Energy", "Fun", "Social", "Bladder"]
 const HINTS : Array[String] = [
 	"drag: throw   2x click: pet   R-click: flick/food",
-	"click: clean/refill   Space: pause   Tab: speed",
-	"1-4: revive extinct   D: debug   H: hide hints",
+	"click poop: clean   Space: pause   Tab: speed",
+	"1-4: add bat/dog/slime/human   D: debug   H: hints",
 ]
 
 var show_hints : bool = true

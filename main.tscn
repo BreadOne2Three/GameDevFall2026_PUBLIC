@@ -2,13 +2,10 @@
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_world"]
 [ext_resource type="PackedScene" path="res://world/terrarium.tscn" id="2_terr"]
-[ext_resource type="PackedScene" uid="uid://csyoxp2vcctah" path="res://entities/bat.tscn" id="3_bat"]
-[ext_resource type="PackedScene" uid="uid://cgt1qlwxyfgdb" path="res://entities/dog.tscn" id="4_dog"]
 [ext_resource type="PackedScene" uid="uid://bcsd3fiiwx34y" path="res://entities/slime.tscn" id="5_slime"]
-[ext_resource type="PackedScene" path="res://world/water_dish.tscn" id="6_dish"]
+[ext_resource type="PackedScene" path="res://world/lake.tscn" id="6_lake"]
 [ext_resource type="PackedScene" path="res://world/litter_box.tscn" id="7_box"]
 [ext_resource type="PackedScene" path="res://world/food.tscn" id="8_food"]
-[ext_resource type="PackedScene" path="res://entities/human.tscn" id="9_human"]
 [ext_resource type="Script" path="res://god/god_hand.gd" id="10_hand"]
 [ext_resource type="PackedScene" path="res://ui/hud.tscn" id="11_hud"]
 
@@ -19,11 +16,8 @@ script = ExtResource("1_world")
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="WaterDish" parent="Objects" instance=ExtResource("6_dish")]
-position = Vector2(40, 268)
-
-[node name="WaterDish2" parent="Objects" instance=ExtResource("6_dish")]
-position = Vector2(280, 40)
+[node name="Lake" parent="Objects" instance=ExtResource("6_lake")]
+position = Vector2(80, 230)
 
 [node name="LitterBox" parent="Objects" instance=ExtResource("7_box")]
 position = Vector2(288, 266)
@@ -32,37 +26,16 @@ position = Vector2(288, 266)
 position = Vector2(160, 160)
 
 [node name="Food2" parent="Objects" instance=ExtResource("8_food")]
-position = Vector2(100, 100)
-
-[node name="Food3" parent="Objects" instance=ExtResource("8_food")]
-position = Vector2(220, 220)
+position = Vector2(220, 110)
 
 [node name="Creatures" type="Node2D" parent="."]
-
-[node name="Bat" parent="Creatures" instance=ExtResource("3_bat")]
-position = Vector2(60, 60)
-
-[node name="Bat2" parent="Creatures" instance=ExtResource("3_bat")]
-position = Vector2(260, 80)
-
-[node name="Dog" parent="Creatures" instance=ExtResource("4_dog")]
-position = Vector2(80, 200)
-
-[node name="Dog2" parent="Creatures" instance=ExtResource("4_dog")]
-position = Vector2(200, 240)
 
 [node name="Slime" parent="Creatures" instance=ExtResource("5_slime")]
 position = Vector2(150, 120)
 
 [node name="Slime2" parent="Creatures" instance=ExtResource("5_slime")]
-position = Vector2(240, 160)
+position = Vector2(200, 170)
 selected_color = 1
-
-[node name="Human" parent="Creatures" instance=ExtResource("9_human")]
-position = Vector2(120, 260)
-
-[node name="Human2" parent="Creatures" instance=ExtResource("9_human")]
-position = Vector2(60, 140)
 
 [node name="GodHand" type="Node2D" parent="."]
 process_mode = 3

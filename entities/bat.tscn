@@ -11,7 +11,7 @@ legs = 3
 creature_name = "Bat"
 species = "Bat"
 health = 8
-move_speed = 70.0
+move_speed = 35.0
 creature_color = Color(0.28725913, 0.98800784, 1, 1)
 
 [node name="Sprite2D" parent="." index="0" unique_id=1413329485]

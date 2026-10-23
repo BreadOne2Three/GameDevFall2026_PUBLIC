@@ -9,7 +9,7 @@
 script = ExtResource("2_imykf")
 creature_name = "slime"
 species = "Slime"
-move_speed = 30.0
+move_speed = 15.0
 selected_color = 0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1413329485]

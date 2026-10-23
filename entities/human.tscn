@@ -11,7 +11,7 @@ script = ExtResource("2_human")
 legs = 2
 creature_name = "human"
 species = "Human"
-move_speed = 30.0
+move_speed = 15.0
 creature_color = Color(1, 1, 1, 1)
 health = 15
 

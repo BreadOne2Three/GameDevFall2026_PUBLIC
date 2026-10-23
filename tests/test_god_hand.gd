@@ -35,14 +35,6 @@ func test_click_cleans_dropping() -> void:
 	hand.release_at(Vector2(200, 50))
 	assert_true(drop.is_queued_for_deletion())
 
-func test_click_refills_dish() -> void:
-	_setup()
-	var dish : WaterDish = world.get_tree().get_nodes_in_group("water")[0]
-	dish.drink()
-	hand.press(dish.global_position)
-	hand.release_at(dish.global_position)
-	assert_eq(dish.sips, dish.max_sips)
-
 func test_double_click_pets() -> void:
 	_setup()
 	creature.brain.think()

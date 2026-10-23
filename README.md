@@ -4,7 +4,8 @@
 
 A tiny god-game ecosystem in Godot 4.6. Creatures (bats, dogs, slimes, humans) have needs —
 hunger, thirst, energy, fun, social, bladder — and a utility-AI brain that picks what to do about them.
-You keep them alive (or don't).
+You keep them alive (or don't). The tank starts with just two slimes and a lake; add other
+species when you want more going on, and let breeding do the rest.
 
 ### Controls
 | Input | Does |
@@ -13,9 +14,9 @@ You keep them alive (or don't).
 | Double-click a creature | pet (reward) |
 | Right-click a creature | flick (punish) |
 | Right-click ground | drop food |
-| Click a dropping / water dish | clean / refill |
+| Click a dropping | clean it up |
 | Space / Tab | pause / speed 1×·2×·4× |
-| 1–4 | bring back an extinct species (bat, dog, slime, human) |
+| 1–4 | add a pair of bats / dogs / slimes / humans (only if none are in the tank) |
 | D / H | AI debug overlay / hide hints |
 
 ### How the AI works

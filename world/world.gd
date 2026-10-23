@@ -3,7 +3,7 @@ class_name World
 ## The terrarium's laws of nature: keeps track of creatures and spawns babies,
 ## droppings and gravestones in response to creature signals.
 
-const MAX_POPULATION := 30
+const MAX_POPULATION := 12
 const MAX_FOOD := 15
 const PICK_RADIUS := 8.0
 const OBJECT_PICK_RADIUS := 7.0

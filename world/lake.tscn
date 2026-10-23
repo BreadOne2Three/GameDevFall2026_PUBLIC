@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/lake.gd" id="1_lake"]
+
+[node name="Lake" type="Node2D" groups=["water"]]
+script = ExtResource("1_lake")

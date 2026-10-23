@@ -3,7 +3,11 @@ class_name BreedAction
 ## Two happy, well-fed adults of the same species have a baby (World.spawn_baby).
 
 @export var breed_score : float = 0.6
-@export var breed_cooldown : float = 45.0
+@export var breed_cooldown : float = 120.0
+
+## Newcomers (founders, babies, reintroduced pairs) settle in before their first baby.
+func _ready() -> void:
+	cooldown_left = breed_cooldown
 
 func score() -> float:
 	if not creature.can_breed() or _world_full():
