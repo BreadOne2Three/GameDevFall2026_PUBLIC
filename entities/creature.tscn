@@ -6,6 +6,11 @@
 [ext_resource type="Script" path="res://components/learning_component.gd" id="5_learn"]
 [ext_resource type="Script" path="res://components/brain_component.gd" id="6_brain"]
 [ext_resource type="Script" path="res://actions/wander_action.gd" id="7_wander"]
+[ext_resource type="Script" path="res://actions/eat_action.gd" id="8_eat"]
+[ext_resource type="Script" path="res://actions/drink_action.gd" id="9_drink"]
+[ext_resource type="Script" path="res://actions/rest_action.gd" id="10_rest"]
+[ext_resource type="Script" path="res://actions/go_here_action.gd" id="11_gohere"]
+[ext_resource type="Script" path="res://actions/use_litter_box_action.gd" id="12_box"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 4.0
@@ -59,6 +64,21 @@ script = ExtResource("6_brain")
 
 [node name="WanderAction" type="Node" parent="Brain"]
 script = ExtResource("7_wander")
+
+[node name="EatAction" type="Node" parent="Brain"]
+script = ExtResource("8_eat")
+
+[node name="DrinkAction" type="Node" parent="Brain"]
+script = ExtResource("9_drink")
+
+[node name="RestAction" type="Node" parent="Brain"]
+script = ExtResource("10_rest")
+
+[node name="GoHereAction" type="Node" parent="Brain"]
+script = ExtResource("11_gohere")
+
+[node name="UseLitterBoxAction" type="Node" parent="Brain"]
+script = ExtResource("12_box")
 
 [node name="Emote" type="Label" parent="."]
 visible = false
