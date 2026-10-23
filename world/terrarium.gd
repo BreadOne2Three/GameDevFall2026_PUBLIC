@@ -12,12 +12,31 @@ static func clamp_to_walk_area(pos: Vector2) -> Vector2:
 static func random_point() -> Vector2:
 	return Vector2(randf_range(WALK_RECT.position.x, WALK_RECT.end.x), randf_range(WALK_RECT.position.y, WALK_RECT.end.y))
 
+const GROUND := Color("222323")   ## the tile sheet's background color
+const TILES_ACROSS := 40          ## 320 px / 8 px
+## Tree spots (in tiles), kept clear of the lake, litter box and HUD bars.
+const TREE_SPOTS : Array[Vector2i] = [Vector2i(2, 3), Vector2i(37, 5), Vector2i(3, 19), Vector2i(37, 24), Vector2i(24, 30)]
+
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, SIZE), Color(0.14, 0.18, 0.22))   # outside the glass
-	draw_rect(INNER_RECT, Color(0.36, 0.27, 0.18))                   # soil
+	draw_rect(Rect2(Vector2.ZERO, SIZE), GROUND)
 	var rng := RandomNumberGenerator.new()
-	rng.seed = 7   # same speckles every run
-	for i in 160:
-		var speck := Vector2(rng.randf_range(INNER_RECT.position.x, INNER_RECT.end.x - 1), rng.randf_range(INNER_RECT.position.y, INNER_RECT.end.y - 1))
-		draw_rect(Rect2(speck, Vector2.ONE), Color(0.29, 0.21, 0.13))
-	draw_rect(INNER_RECT, Color(0.7, 0.9, 1.0, 0.6), false, 1.0)      # glass edge
+	rng.seed = 7   # same decoration every run
+	for i in 30:
+		var spot := Vector2(rng.randi_range(2, TILES_ACROSS - 3), rng.randi_range(3, TILES_ACROSS - 6)) * Tiles.SIZE
+		Tiles.draw(self, Tiles.SPROUTS if i % 3 == 0 else Tiles.SPECKLE, spot)
+	for i in TREE_SPOTS.size():
+		Tiles.draw(self, Tiles.TREES[i % Tiles.TREES.size()], Vector2(TREE_SPOTS[i] * Tiles.SIZE))
+	_draw_walls()
+
+## A ring of stone wall tiles along the edge (where the collision walls are).
+func _draw_walls() -> void:
+	var last := TILES_ACROSS - 1
+	for i in range(1, last):
+		Tiles.draw(self, Tiles.WALL, Vector2(i, 0) * Tiles.SIZE)
+		Tiles.draw(self, Tiles.WALL, Vector2(i, last) * Tiles.SIZE)
+		Tiles.draw(self, Tiles.WALL_LEFT, Vector2(0, i) * Tiles.SIZE)
+		Tiles.draw(self, Tiles.WALL_RIGHT, Vector2(last, i) * Tiles.SIZE)
+	Tiles.draw(self, Tiles.WALL_TOP_LEFT, Vector2.ZERO)
+	Tiles.draw(self, Tiles.WALL_TOP_RIGHT, Vector2(last, 0) * Tiles.SIZE)
+	Tiles.draw(self, Tiles.WALL_BOTTOM_LEFT, Vector2(0, last) * Tiles.SIZE)
+	Tiles.draw(self, Tiles.WALL_BOTTOM_RIGHT, Vector2(last, last) * Tiles.SIZE)

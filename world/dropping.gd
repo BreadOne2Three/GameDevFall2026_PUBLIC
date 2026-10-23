@@ -5,5 +5,4 @@ class_name Dropping
 @export var nutrition : float = 10.0
 
 func _draw() -> void:
-	draw_circle(Vector2(0, 1), 2.0, Color(0.35, 0.22, 0.1))
-	draw_circle(Vector2(0, -0.5), 1.3, Color(0.4, 0.26, 0.12))
+	Tiles.draw(self, Tiles.DROPPING, Vector2(-4, -4), Color(0.85, 0.62, 0.4))

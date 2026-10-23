@@ -16,7 +16,4 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func _draw() -> void:
-	draw_rect(Rect2(-3, -4, 6, 8), Color(0.6, 0.6, 0.65))
-	draw_circle(Vector2(0, -4), 3.0, Color(0.6, 0.6, 0.65))
-	draw_line(Vector2(0, -5), Vector2(0, -1), Color(0.35, 0.35, 0.4))
-	draw_line(Vector2(-1.5, -3.5), Vector2(1.5, -3.5), Color(0.35, 0.35, 0.4))
+	Tiles.draw(self, Tiles.GRAVE, Vector2(-4, -4))

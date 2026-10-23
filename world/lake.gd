@@ -1,8 +1,9 @@
 extends Node2D
 class_name Lake
-## A permanent pond. It never runs dry; thirsty creatures walk to the nearest bit of shore.
+## A permanent pond built from water tiles. It never runs dry;
+## thirsty creatures walk to the nearest bit of shore.
 
-@export var radius : Vector2 = Vector2(34, 20)   ## half-width and half-height of the oval
+@export var size_in_tiles : Vector2i = Vector2i(6, 4)
 @export var sip_amount : float = 50.0
 
 func has_water() -> bool:
@@ -12,21 +13,34 @@ func has_water() -> bool:
 func drink() -> float:
 	return sip_amount
 
+func half_size() -> Vector2:
+	return Vector2(size_in_tiles * Tiles.SIZE) / 2.0
+
+func rect() -> Rect2:
+	return Rect2(global_position - half_size(), half_size() * 2.0)
+
 ## Is pos on (or in) the water?
 func contains(pos: Vector2) -> bool:
-	var d := (pos - global_position) / radius
-	return d.length() <= 1.0
+	return rect().has_point(pos)
 
-## The point on the shore closest to `from` (along the line to the lake's center).
+## The point on the shore closest to `from`.
 func shore_point(from: Vector2) -> Vector2:
-	var d := (from - global_position) / radius
-	if d.is_zero_approx():
-		d = Vector2.RIGHT
-	return global_position + d.normalized() * radius
+	var r := rect()
+	var p := from.clamp(r.position, r.end)
+	if not contains(from):
+		return p
+	# Already in the water: step out through the nearest edge.
+	var to_edge := [p.x - r.position.x, r.end.x - p.x, p.y - r.position.y, r.end.y - p.y]
+	match to_edge.find(to_edge.min()):
+		0: return Vector2(r.position.x, p.y)
+		1: return Vector2(r.end.x, p.y)
+		2: return Vector2(p.x, r.position.y)
+		_: return Vector2(p.x, r.end.y)
 
 func _draw() -> void:
-	draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0, radius.y / radius.x))
-	draw_circle(Vector2.ZERO, radius.x + 2.0, Color(0.42, 0.36, 0.22))   # muddy bank
-	draw_circle(Vector2.ZERO, radius.x, Color(0.2, 0.42, 0.75))
-	draw_circle(Vector2(-radius.x * 0.25, -radius.x * 0.2), radius.x * 0.55, Color(0.3, 0.55, 0.88))
-	draw_set_transform(Vector2.ZERO)
+	var top_left := -half_size()
+	for y in size_in_tiles.y:
+		for x in size_in_tiles.x:
+			var col := 0 if x == 0 else (2 if x == size_in_tiles.x - 1 else 1)
+			var row := 0 if y == 0 else (2 if y == size_in_tiles.y - 1 else 1)
+			Tiles.draw(self, Tiles.WATER[row * 3 + col], top_left + Vector2(x, y) * Tiles.SIZE)

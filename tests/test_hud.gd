@@ -5,9 +5,9 @@ const MAIN := preload("res://main.tscn")
 func test_hud_toggles_and_describes_actions() -> void:
 	var world : World = add(MAIN.instantiate())
 	var hud : Control = world.get_node("HUD/Panel")
-	assert_true(hud.show_hints)
+	assert_false(hud.show_hints, "hints start hidden to keep the screen calm")
 	hud.toggle_hints()
-	assert_false(hud.show_hints)
+	assert_true(hud.show_hints)
 	hud.toggle_debug()
 	assert_true(hud.show_debug)
 	var c : Creature = world.get_tree().get_nodes_in_group("creatures")[0]

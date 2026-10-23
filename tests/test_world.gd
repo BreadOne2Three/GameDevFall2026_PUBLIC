@@ -64,12 +64,12 @@ func test_lake_never_runs_out() -> void:
 		assert_near(lake.drink(), lake.sip_amount)
 	assert_true(lake.has_water())
 
-func test_lake_shore_point_faces_the_creature() -> void:
+func test_lake_shore_point_is_nearest_edge() -> void:
 	var lake : Node2D = add(load("res://world/lake.tscn").instantiate())
 	lake.position = Vector2(100, 100)
-	var shore : Vector2 = lake.shore_point(Vector2(200, 100))
-	assert_near(shore.x, 100 + lake.radius.x, 0.01)
-	assert_near(shore.y, 100.0, 0.01)
+	var half : Vector2 = lake.half_size()
+	assert_eq(lake.shore_point(Vector2(200, 100)), Vector2(100 + half.x, 100))
+	assert_eq(lake.shore_point(Vector2(90, 20)), Vector2(90, 100 - half.y))
 	assert_true(lake.contains(Vector2(105, 102)))
 	assert_false(lake.contains(Vector2(200, 100)))
 

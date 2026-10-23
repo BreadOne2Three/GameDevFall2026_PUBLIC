@@ -32,6 +32,7 @@ const BREED_MOOD_MIN := 0.6
 @onready var brain : BrainComponent = $Brain
 @onready var learning : LearningComponent = $LearningComponent
 @onready var emote_label : Label = $Emote
+@onready var emote_icon : Sprite2D = $EmoteIcon
 
 @export var legs : int = 4
 @export var creature_name : String = "creature"
@@ -89,6 +90,7 @@ func _process(delta: float) -> void:
 		_emote_time -= delta
 		if _emote_time <= 0.0:
 			emote_label.visible = false
+			emote_icon.visible = false
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -282,9 +284,17 @@ func _fly(delta: float) -> void:
 
 # --- Visuals -----------------------------------------------------------------
 
+## Emotes that have an icon in the tile sheet; anything else is shown as text.
+const EMOTE_ICONS := {"<3": Tiles.HEART, "!": Tiles.ALERT, "?": Tiles.SPEECH, "~": Tiles.SPARKLE}
+
 func emote(text: String, duration: float = 2.0) -> void:
-	emote_label.text = text
-	emote_label.visible = true
+	var has_icon := EMOTE_ICONS.has(text)
+	emote_icon.visible = has_icon
+	emote_label.visible = not has_icon
+	if has_icon:
+		emote_icon.region_rect = Tiles.region(EMOTE_ICONS[text])
+	else:
+		emote_label.text = text
 	_emote_time = duration
 
 func _grow(delta: float) -> void:

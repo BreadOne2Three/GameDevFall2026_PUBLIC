@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://actions/play_action.gd" id="13_play"]
 [ext_resource type="Script" path="res://actions/communicate_action.gd" id="14_talk"]
 [ext_resource type="Script" path="res://actions/breed_action.gd" id="15_breed"]
+[ext_resource type="Texture2D" path="res://assets/micro_roguelike.png" id="16_tiles"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 4.0
@@ -129,6 +130,13 @@ offset_right = 16.0
 offset_bottom = -7.0
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
+
+[node name="EmoteIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -10)
+texture = ExtResource("16_tiles")
+region_enabled = true
+region_rect = Rect2(8, 48, 8, 8)
 
 [connection signal="maxed" from="Needs/Hunger" to="." method="_on_starved"]
 [connection signal="relieved" from="Needs/Hunger" to="." method="_on_fed"]

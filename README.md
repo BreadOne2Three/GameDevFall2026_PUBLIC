@@ -17,7 +17,7 @@ species when you want more going on, and let breeding do the rest.
 | Click a dropping | clean it up |
 | Space / Tab | pause / speed 1×·2×·4× |
 | 1–4 | add a pair of bats / dogs / slimes / humans (only if none are in the tank) |
-| D / H | AI debug overlay / hide hints |
+| D / H | AI debug overlay / show key hints |
 
 ### How the AI works
 - **Utility AI** (`components/brain_component.gd`): every action under a creature's `Brain` node scores itself; the best one runs. Tweak `ramp_start`/`ramp_end`/`max_score` or draw a `score_curve` in the inspector.
@@ -27,3 +27,6 @@ species when you want more going on, and let breeding do the rest.
 
 ### Tests
 `tests/run.sh` (set `GODOT=/path/to/Godot` if it isn't in `~/Downloads/Godot.app`).
+
+### Credits
+Art: [Micro Roguelike](https://kenney.nl/assets/micro-roguelike) by Kenney (CC0). `assets/micro_roguelike.png` is the colored packed tilemap with its background made transparent.

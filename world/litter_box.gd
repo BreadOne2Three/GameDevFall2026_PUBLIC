@@ -3,5 +3,6 @@ class_name LitterBox
 ## Where well-trained creatures go to the bathroom.
 
 func _draw() -> void:
-	draw_rect(Rect2(-9, -7, 18, 14), Color(0.45, 0.3, 0.2))
-	draw_rect(Rect2(-8, -6, 16, 12), Color(0.85, 0.78, 0.55))
+	for y in 2:
+		for x in 2:
+			Tiles.draw(self, Tiles.GRATE, Vector2(x * 8 - 8, y * 8 - 8), Color(0.95, 0.85, 0.6))
