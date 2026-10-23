@@ -14,7 +14,7 @@ const GIVE_UP_COOLDOWN := 2.0      ## cooldown after abandoning an action that t
 @export var think_interval : float = 0.25
 @export var stickiness : float = 0.1
 
-var creature : Node
+var creature : Creature
 var learning : LearningComponent
 var actions : Array[UtilityAction] = []
 var current_action : UtilityAction = null
@@ -22,7 +22,7 @@ var last_scores : Dictionary = {}  ## action name -> final score from the last t
 var _think_timer : float = 0.0
 var _action_time : float = 0.0
 
-func setup(owner_creature: Node, learning_component: LearningComponent) -> void:
+func setup(owner_creature: Creature, learning_component: LearningComponent) -> void:
 	creature = owner_creature
 	learning = learning_component
 	actions.clear()
@@ -111,8 +111,8 @@ func current_action_name() -> String:
 	return String(current_action.name) if current_action else ""
 
 ## Another creature asks us to join a joint action (play, talk, breed). Returns true if we accept.
-func request_joint(action_name: String, initiator: Node) -> bool:
-	if creature and creature.state != 0:   # 0 = Creature.State.NORMAL
+func request_joint(action_name: String, initiator: Creature) -> bool:
+	if creature and creature.state != Creature.State.NORMAL:
 		return false
 	if current_action and (current_action.is_survival or current_action.is_committed()):
 		return false

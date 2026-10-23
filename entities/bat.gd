@@ -1,14 +1,13 @@
 @tool
 extends Creature
 class_name Bat
+## Starving bats speed up (×1.25) and drain other creatures' blood (DrainAction).
 
 func make_sound() -> void:
 	print(creature_name, "squeak squeak")
 
-func move_toward_point(target_pos: Vector2, delta : float) -> void:
-	global_position = global_position.move_toward(target_pos, move_speed * delta)
+func starving_speed_multiplier() -> float:
+	return 1.25
 
-var is_aggroed : bool = false
-func _on_starved() -> void:
-	is_aggroed = true
-	move_speed = move_speed * 1.25
+func can_get_aggressive() -> bool:
+	return true

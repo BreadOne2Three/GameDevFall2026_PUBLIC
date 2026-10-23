@@ -16,7 +16,7 @@ const REACH := 6.0  ## how close counts as "arrived" when walking to something
 @export var score_curve : Curve
 @export var max_duration : float = 15.0    ## the brain gives up on this action after this many seconds
 
-var creature : Node                        ## set by BrainComponent.setup()
+var creature : Creature                    ## set by BrainComponent.setup()
 var cooldown_left : float = 0.0            ## while > 0 the brain treats this action as impossible
 
 ## How much this action wants to run (0 = impossible / not at all, ~1 = urgent).
@@ -52,7 +52,7 @@ func is_committed() -> bool:
 	return false
 
 ## Joint actions: would this creature join `initiator`? Default: if our need is at least 30% unmet.
-func accepts_invite(_initiator: Node) -> bool:
+func accepts_invite(_initiator: Creature) -> bool:
 	return need_ratio() >= 0.3
 
 ## Walk toward pos. Returns true once within REACH (and stops).

@@ -16,3 +16,7 @@ func move_toward_point(target_pos: Vector2, delta : float) -> void:
 	super.move_toward_point(target_pos, delta)
 	if randf() < .02:
 		velocity.y -= 10
+
+## Slimes wear their color gene, so breeding can produce brand-new colors.
+func expresses_color_gene() -> bool:
+	return true

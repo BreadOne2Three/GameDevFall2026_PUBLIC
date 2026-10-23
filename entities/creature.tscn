@@ -1,22 +1,77 @@
 [gd_scene format=3 uid="uid://bgyd1tv1qc5wf"]
 
 [ext_resource type="Script" uid="uid://ckyip60fegaii" path="res://entities/creature.gd" id="1_fd6ru"]
-[ext_resource type="PackedScene" uid="uid://cingeu23m2dyn" path="res://components/hunger_component.tscn" id="2_27ukq"]
 [ext_resource type="PackedScene" uid="uid://c4q5kfvonfw24" path="res://components/movement_component.tscn" id="3_s2qhw"]
+[ext_resource type="Script" path="res://components/need_component.gd" id="4_need"]
+[ext_resource type="Script" path="res://components/learning_component.gd" id="5_learn"]
+[ext_resource type="Script" path="res://components/brain_component.gd" id="6_brain"]
+[ext_resource type="Script" path="res://actions/wander_action.gd" id="7_wander"]
 
-[node name="Creature" type="CharacterBody2D" unique_id=1666358491]
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 4.0
+
+[node name="Creature" type="CharacterBody2D" unique_id=1666358491 groups=["creatures"]]
+collision_layer = 2
+collision_mask = 1
 script = ExtResource("1_fd6ru")
 health = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1413329485]
 
-[node name="HungerComponent" parent="." unique_id=716004962 instance=ExtResource("2_27ukq")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_body")
+
+[node name="Needs" type="Node" parent="."]
+
+[node name="Hunger" type="Node" parent="Needs"]
+script = ExtResource("4_need")
+rate = 1.0
+
+[node name="Thirst" type="Node" parent="Needs"]
+script = ExtResource("4_need")
+rate = 1.4
+
+[node name="Energy" type="Node" parent="Needs"]
+script = ExtResource("4_need")
+rate = 0.8
+
+[node name="Fun" type="Node" parent="Needs"]
+script = ExtResource("4_need")
+
+[node name="Social" type="Node" parent="Needs"]
+script = ExtResource("4_need")
+rate = 0.7
+
+[node name="Bladder" type="Node" parent="Needs"]
+script = ExtResource("4_need")
+rate = 1.2
 
 [node name="TimeToLive" type="Timer" parent="." unique_id=900654869]
 wait_time = 5.0
 
 [node name="MovementComponent" parent="." unique_id=143754694 instance=ExtResource("3_s2qhw")]
 
-[connection signal="hunger_changed" from="HungerComponent" to="." method="_on_hunger_changed"]
-[connection signal="starved" from="HungerComponent" to="." method="_on_starved"]
+[node name="LearningComponent" type="Node" parent="."]
+script = ExtResource("5_learn")
+
+[node name="Brain" type="Node" parent="."]
+script = ExtResource("6_brain")
+
+[node name="WanderAction" type="Node" parent="Brain"]
+script = ExtResource("7_wander")
+
+[node name="Emote" type="Label" parent="."]
+visible = false
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = -7.0
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+
+[connection signal="maxed" from="Needs/Hunger" to="." method="_on_starved"]
+[connection signal="relieved" from="Needs/Hunger" to="." method="_on_fed"]
+[connection signal="maxed" from="Needs/Thirst" to="." method="_on_dehydrated"]
+[connection signal="relieved" from="Needs/Thirst" to="." method="_on_rehydrated"]
+[connection signal="maxed" from="Needs/Bladder" to="." method="_on_bladder_full"]
 [connection signal="timeout" from="TimeToLive" to="." method="_on_time_to_live_timeout"]

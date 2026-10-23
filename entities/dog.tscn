@@ -7,6 +7,8 @@
 [node name="Dog" unique_id=1666358491 instance=ExtResource("1_l34on")]
 script = ExtResource("2_60dt4")
 creature_name = "dog"
+species = "Dog"
+prey_species = Array[String](["Slime", "Bat"])
 creature_color = Color(0.7720941, 0.65600693, 0.30751157, 1)
 
 [node name="Sprite2D" parent="." index="0" unique_id=1413329485]

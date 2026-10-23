@@ -6,6 +6,9 @@
 
 [node name="Slime" unique_id=1666358491 instance=ExtResource("1_tm2b2")]
 script = ExtResource("2_imykf")
+creature_name = "slime"
+species = "Slime"
+move_speed = 30.0
 selected_color = 0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1413329485]
