@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://world/food.tscn" id="8_food"]
 [ext_resource type="PackedScene" path="res://entities/human.tscn" id="9_human"]
 [ext_resource type="Script" path="res://god/god_hand.gd" id="10_hand"]
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="11_hud"]
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_world")
@@ -66,3 +67,5 @@ position = Vector2(60, 140)
 [node name="GodHand" type="Node2D" parent="."]
 process_mode = 3
 script = ExtResource("10_hand")
+
+[node name="HUD" parent="." instance=ExtResource("11_hud")]
