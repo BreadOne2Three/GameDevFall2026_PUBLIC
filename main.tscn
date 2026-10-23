@@ -20,13 +20,13 @@ script = ExtResource("1_world")
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="WaterDish" parent="Objects" instance=ExtResource("6_dish")]
-position = Vector2(40, 290)
+position = Vector2(40, 268)
 
 [node name="WaterDish2" parent="Objects" instance=ExtResource("6_dish")]
 position = Vector2(280, 40)
 
 [node name="LitterBox" parent="Objects" instance=ExtResource("7_box")]
-position = Vector2(290, 290)
+position = Vector2(288, 266)
 
 [node name="Food" parent="Objects" instance=ExtResource("8_food")]
 position = Vector2(160, 160)
