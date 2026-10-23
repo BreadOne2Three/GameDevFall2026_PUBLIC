@@ -54,7 +54,9 @@ func run(delta: float) -> bool:
 		return false
 	_time_left -= delta
 	together(delta)
-	if _time_left <= 0.0:
+	# Only the initiator's clock ends the activity; the invited partner keeps going until
+	# the initiator is done (otherwise whoever arrived first would leave a frame early).
+	if _time_left <= 0.0 and not invited:
 		finish_together()
 		return true
 	return false

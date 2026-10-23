@@ -67,7 +67,7 @@ func test_breed_requires_two_content_adults_of_same_species() -> void:
 	b.need("Hunger").add(60.0)
 	assert_near(breed.score(), 0.0, 0.001, "hungry partner can't breed")
 
-func test_breeding_emits_bred_once_and_sets_cooldowns() -> void:
+func _breed_pair(invited_ticks_first: bool) -> Array:
 	var a := _spawn(DOG, Vector2(100, 100))
 	var b := _spawn(DOG, Vector2(105, 100))
 	_content(a); _content(b)
@@ -77,18 +77,26 @@ func test_breeding_emits_bred_once_and_sets_cooldowns() -> void:
 	var breed := a.brain.get_action("BreedAction")
 	breed.score()
 	a.brain.switch_to(breed)
-	var partner_breed := b.brain.get_action("BreedAction")
-	var done_a := false
-	var done_b := false
 	for i in 30:
-		if not done_a:
-			done_a = breed.run(0.1)
-		if not done_b:
-			done_b = partner_breed.run(0.1)
-	assert_true(done_a and done_b)
-	assert_eq(births[0], 1)
-	assert_true(breed.cooldown_left > 0.0)
-	assert_true(partner_breed.cooldown_left > 0.0)
+		if invited_ticks_first:
+			b.brain.tick(0.1)
+			a.brain.tick(0.1)
+		else:
+			a.brain.tick(0.1)
+			b.brain.tick(0.1)
+	return [births[0], breed.cooldown_left, b.brain.get_action("BreedAction").cooldown_left]
+
+func test_breeding_emits_bred_once_and_sets_cooldowns() -> void:
+	var result := _breed_pair(false)
+	assert_eq(result[0], 1)
+	assert_true(result[1] > 0.0)
+	assert_true(result[2] > 0.0)
+
+func test_breeding_completes_when_partner_ticks_first() -> void:
+	var result := _breed_pair(true)
+	assert_eq(result[0], 1)
+	assert_true(result[1] > 0.0)
+	assert_true(result[2] > 0.0)
 
 func test_babies_cannot_breed() -> void:
 	var a := _spawn(DOG, Vector2(100, 100))
